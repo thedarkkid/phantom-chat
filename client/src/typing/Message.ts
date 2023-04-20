@@ -1,6 +1,8 @@
+import { User } from "./User";
+
 export interface Message {
-	sender: number|string;
+	sender: User;
 	timestamp: number;
-	thread: number;
+	thread: string;
 	body: string;
 }

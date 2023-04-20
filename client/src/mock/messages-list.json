@@ -1,25 +1,37 @@
 {
   "messages": [
     {
-      "sender": 210293,
+      "sender": {
+        "id": 14,
+        "tag": "nationalslender1"
+      },
       "thread": "xxx2321423",
       "timestamp": 100023120012,
       "body": "similique!"
     },
     {
-      "sender": 223293,
+      "sender": {
+        "id": 12,
+        "tag": "uniformpapparazi"
+      },
       "thread": "xxpo12x23145",
       "timestamp": 100023120025,
       "body": "perferendis"
     },
     {
-      "sender": 77817231,
+      "sender": {
+        "id": 22,
+        "tag": "12thguagediq"
+      },
       "thread": "e13tt891os",
       "timestamp": 100023120032,
       "body": "nihil"
     },
     {
-      "sender": 12289012,
+      "sender": {
+        "id": 25,
+        "tag": "armageddont"
+      },
       "thread": "e0xtix23145",
       "timestamp": 100023120048,
       "body": "nam quibusdam, reiciendis sed tenetur! "

@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 14,
+      "tag": "nationalslender1"
+    },
+    {
+      "id": 12,
+      "tag": "uniformpapparazi"
+    },
+    {
+      "id": 22,
+      "tag": "12thguagediq"
+    },
+    {
+      "id": 25,
+      "tag": "armageddont"
+    }
+  ],
+  "me": {
+    "id": 16,
+    "tag": "mebadbot"
+  }
+}

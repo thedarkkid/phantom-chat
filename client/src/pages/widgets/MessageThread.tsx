@@ -11,7 +11,7 @@ const MessageThread: React.FC<{ thread: Message[], user: User, sender: User }> =
 				<h2 className="sender-tag">{sender.tag}</h2>
 			</div>
 			{thread.map(message => (
-				<div className={`message-wrapper ${user.id === message.sender ? 'mine' : ''}`}>
+				<div className={`message-wrapper ${user.id === message.sender.id ? 'mine' : ''}`}>
 					<div className="message-body">{message.body}</div>
 					<div className="message-time">{parseTimestamp(message.timestamp)}</div>
 				</div>

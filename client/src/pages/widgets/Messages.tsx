@@ -9,7 +9,8 @@ const Messages: React.FC<{ messages: Message[] }> = ({ messages }) => {
 			<h2>Messages</h2>
 			<ul className="message-list">
 				{messages.map(message => (
-					<li className={"message-list-item"}>
+					<li key={message.timestamp} className={"message-list-item"}>
+						<div className="message-sender">{message.sender.tag}</div>
 						<div className="message-body">{message.body}</div>
 						<div className="message-time">{parseTimestamp(message.timestamp)}</div>
 					</li>
