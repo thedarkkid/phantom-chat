@@ -1,0 +1,13 @@
+.message-box {
+  .message-wrapper {
+    &.mine {
+      text-align: right;
+    }
+
+    margin-bottom: 20px;
+  }
+
+  padding-right: 5px;
+  max-height: 65vh;
+  overflow-y: scroll;
+}
