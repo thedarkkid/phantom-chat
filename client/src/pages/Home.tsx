@@ -1,12 +1,16 @@
 import React from "react";
-import MessagesList from '../mock/messages-list.json';
 import Messages from "./widgets/Messages";
+import { getUserMessagesList } from "../inc/services/Messages";
+import { getUser } from "../inc/services/Auth";
 
 const Home: React.FC = () => {
+	const authUser = getUser();
+	const userMessages = getUserMessagesList(authUser.id);
+
 	return (
 		<>
 			<section className="messages">
-				<Messages messages={MessagesList.messages} />
+				<Messages messages={userMessages}/>
 			</section>
 		</>
 
