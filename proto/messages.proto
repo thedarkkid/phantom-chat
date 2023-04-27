@@ -1,0 +1,17 @@
+syntax = "proto3";
+package _messages;
+import "proto/auth.proto";
+
+message Message {
+  _auth.User sender = 1;
+  int32 timestamp = 2;
+  string threadId = 3;
+  string body = 4;
+}
+
+message MessageThread {
+  _auth.User sender = 1;
+  _auth.User recipient = 2;
+  string threadId = 3;
+  repeated Message messages = 4;
+}

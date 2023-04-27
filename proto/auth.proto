@@ -1,0 +1,7 @@
+syntax = "proto3";
+package _auth;
+
+message User {
+  string id = 1;
+  string tag = 2;
+}
