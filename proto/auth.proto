@@ -5,3 +5,17 @@ message User {
   string id = 1;
   string tag = 2;
 }
+
+message AuthenticateUserRequest {
+  string userTag = 1;
+  string token = 2;
+}
+
+message GetUserRequest {
+  string token = 1;
+}
+
+service AuthService {
+  rpc AuthenticateUser(AuthenticateUserRequest) returns (User) {}
+  rpc GetUser(GetUserRequest)returns (User) {}
+}
