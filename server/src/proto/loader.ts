@@ -1,21 +1,24 @@
 import * as path from "path";
 import * as grpc from "@grpc/grpc-js";
-import * as protoLoader from "@grpc/proto-loader"
+import * as protoLoader from "@grpc/proto-loader";
 
-let MESSAGE_PROTO_PATH = 'messages.proto';
-let AUTH_PROTO_PATH = 'auth.proto';
+const MESSAGE_PROTO_PATH = "messages.proto";
+const AUTH_PROTO_PATH = "auth.proto";
 
 const protoOptions: protoLoader.Options = {
-	keepCase: true,
-	longs: String,
-	enums: String,
-	defaults: true,
-	oneofs: true,
-	includeDirs: [ path.join(__dirname, '../../../', 'proto') ]
-}
+  keepCase: true,
+  longs: String,
+  enums: String,
+  defaults: true,
+  oneofs: true,
+  includeDirs: [path.join(__dirname, "../../../", "proto")],
+};
 
-let _messagePackageDef = protoLoader.loadSync(MESSAGE_PROTO_PATH, protoOptions);
-let _authPackageDef = protoLoader.loadSync(AUTH_PROTO_PATH, protoOptions);
+const _messagePackageDef = protoLoader.loadSync(
+  MESSAGE_PROTO_PATH,
+  protoOptions
+);
+const _authPackageDef = protoLoader.loadSync(AUTH_PROTO_PATH, protoOptions);
 
 const _messageProtoDescriptor = grpc.loadPackageDefinition(_messagePackageDef);
 const _authProtoDescriptor = grpc.loadPackageDefinition(_authPackageDef);
