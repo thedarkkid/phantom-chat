@@ -1,6 +1,6 @@
 syntax = "proto3";
 package _messages;
-import "proto/auth.proto";
+import "auth.proto";
 
 message Message {
   _auth.User sender = 1;
@@ -14,4 +14,22 @@ message MessageThread {
   _auth.User recipient = 2;
   string threadId = 3;
   repeated Message messages = 4;
+}
+
+message ThreadRequest {
+  string threadId = 1;
+}
+
+message MessageRequest {
+  string userId = 1;
+}
+
+message MessagesResponse {
+  repeated Message messages = 1;
+}
+
+service MessageService {
+  rpc GetMessageThread(ThreadRequest) returns (MessageThread){}
+  rpc GetUserMessagesList(MessageRequest) returns(MessagesResponse){}
+  rpc GetUserMessagesRequests(MessageRequest) returns(MessagesResponse){}
 }
