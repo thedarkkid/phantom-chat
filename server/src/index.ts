@@ -2,7 +2,7 @@ import * as grpc from "@grpc/grpc-js";
 import { server } from "./proto/server";
 
 server.bindAsync(
-  "0.0.0.0:50051",
+  "0.0.0.0:9090",
   grpc.ServerCredentials.createInsecure(),
   (error, port) => {
     server.start();
