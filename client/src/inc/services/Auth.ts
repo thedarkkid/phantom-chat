@@ -1,13 +1,17 @@
-import { GetUserRequest } from "../stubs/auth_pb";
+import { GetUserRequest, User } from "../stubs/auth_pb";
 import { AuthServiceClient } from "../stubs/auth_pb_service";
+import { IUser } from "../typing/IUser";
 
-export const getUser =  (token: string = "ran"): any => {
-	let client = new AuthServiceClient('http://localhost:8080');
+const SERVICE_HOST = "http://localhost:8080";
+export const getUser = async (token: string = "-"): Promise<IUser> => {
+	let client = new AuthServiceClient(SERVICE_HOST);
 	let request = new GetUserRequest();
 	request.setToken(token);
 
-	console.log("tried to get user");
-	return client.getUser(request, {} as any, (err, response) => {
-		console.log(response, "auth res");
+	return new Promise((resolve, reject) => {
+		client.getUser(request, {} as any, (err, res: User | null) => {
+			if (res) resolve(res?.toObject() as IUser);
+			if (err || !res) reject(err);
+		});
 	})
 }

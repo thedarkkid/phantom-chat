@@ -4,13 +4,13 @@ import { getUserMessagesList } from "../inc/services/Messages";
 import { getUser } from "../inc/services/Auth";
 
 const Home: React.FC = () => {
-	const authUser = getUser();
-	const userMessages = getUserMessagesList(authUser.id);
-	console.log(authUser, "user");
+	const authUser: Promise<any> = getUser();
+	console.log(authUser, "auth-user");
+	// const userMessages = getUserMessagesList(authUser.id ?? 1);
 	return (
 		<>
 			<section className="messages">
-				<Messages messages={userMessages}/>
+				{/*<Messages messages={userMessages}/>*/}
 			</section>
 		</>
 

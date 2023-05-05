@@ -1,17 +1,17 @@
 import React from "react";
 import { getUserMessageRequests } from "../inc/services/Messages";
-import { User } from "../inc/typing/User";
+import { IUser } from "../inc/typing/IUser";
 import { getUser } from "../inc/services/Auth";
 import Messages from "./widgets/Messages";
 
 const MessageRequests: React.FC = () => {
-	const authUser: User = getUser();
-	const incomingMessageRequest = getUserMessageRequests(authUser.id);
+	// const authUser: Promise<User> = getUser();
+	// const incomingMessageRequest = getUserMessageRequests(authUser.id);
 	return (
 		<div className="my-message-requests">
-			{incomingMessageRequest && incomingMessageRequest.length > 0 &&
-				<Messages messages={incomingMessageRequest} title="Message Requests"/>
-			}
+			{/*{incomingMessageRequest && incomingMessageRequest.length > 0 &&*/}
+			{/*	<Messages messages={incomingMessageRequest} title="Message Requests"/>*/}
+			{/*}*/}
 		</div>
 	);
 }

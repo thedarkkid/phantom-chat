@@ -17,5 +17,4 @@ grpcServer.addService((_auth as any).AuthService.service, {
   authenticateUser,
   getUser,
 });
-
 export const server: grpc.Server = grpcServer;
