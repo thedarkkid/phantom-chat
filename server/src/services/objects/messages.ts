@@ -3,7 +3,7 @@ import {
   getUserMessagesList,
   getUserMessagesRequest,
 } from "../Messages";
-import { ServiceFunctionObject } from "../../typing";
+import { ServiceFunctionObject } from "../../common/typing";
 
 export const services: ServiceFunctionObject = {
   getMessageThread,

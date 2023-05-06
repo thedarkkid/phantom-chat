@@ -1,5 +1,5 @@
-import { IUser } from "../typing/Auth";
-import { ServiceFunction } from "../typing";
+import { IUser } from "../common/typing/Auth";
+import { ServiceFunction } from "../common/typing";
 
 export const authenticateUser = (req: any) => {
   console.info("FN:: authenticateUser");

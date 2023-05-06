@@ -1,5 +1,5 @@
 import { authenticateUser, getUser } from "../Auth";
-import { ServiceFunctionObject } from "../../typing";
+import { ServiceFunctionObject } from "../../common/typing";
 
 export const services: ServiceFunctionObject = {
   authenticateUser,

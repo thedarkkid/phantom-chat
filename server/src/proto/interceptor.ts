@@ -1,9 +1,9 @@
 import * as grpc from "@grpc/grpc-js";
-import { ServiceFunction } from "../typing";
+import { ServiceFunction } from "../common/typing";
 
 export type InterceptorNext = () => void;
 
-export interface ServerInterceptor<RequestType, ResponseType> {
+export interface ServerInterceptor<RequestType = any, ResponseType = any> {
   (
     call: grpc.ServerUnaryCall<RequestType, ResponseType>,
     callback: grpc.requestCallback<ResponseType>,
