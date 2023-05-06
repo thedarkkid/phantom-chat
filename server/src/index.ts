@@ -1,6 +1,12 @@
 import * as grpc from "@grpc/grpc-js";
-import { server } from "./proto/server";
 import { sequelize } from "./db";
+import { auth, messages } from "./proto/loader";
+import { services as messageServiceFunctions } from "./services/objects/messages";
+import { services as authServiceFunctions } from "./services/objects/auth";
+
+const server = new grpc.Server();
+server.addService(messages.MessageService.service, messageServiceFunctions);
+server.addService(auth.AuthService.service, authServiceFunctions);
 
 server.bindAsync(
   "0.0.0.0:9090",

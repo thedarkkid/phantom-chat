@@ -23,5 +23,5 @@ const _authPackageDef = protoLoader.loadSync(AUTH_PROTO_PATH, protoOptions);
 const _messageProtoDescriptor = grpc.loadPackageDefinition(_messagePackageDef);
 const _authProtoDescriptor = grpc.loadPackageDefinition(_authPackageDef);
 
-export const _messages = _messageProtoDescriptor._messages;
-export const _auth = _authProtoDescriptor._auth;
+export const messages = _messageProtoDescriptor._messages as any; // TODO: get actual types.
+export const auth = _authProtoDescriptor._auth as any; // TODO: get actual types.
