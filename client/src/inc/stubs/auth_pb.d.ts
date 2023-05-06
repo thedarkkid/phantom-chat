@@ -10,6 +10,9 @@ export class User extends jspb.Message {
   getTag(): string;
   setTag(value: string): void;
 
+  getToken(): string;
+  setToken(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): User.AsObject;
   static toObject(includeInstance: boolean, msg: User): User.AsObject;
@@ -24,6 +27,7 @@ export namespace User {
   export type AsObject = {
     id: string,
     tag: string,
+    token: string,
   }
 }
 
@@ -31,8 +35,8 @@ export class AuthenticateUserRequest extends jspb.Message {
   getUsertag(): string;
   setUsertag(value: string): void;
 
-  getToken(): string;
-  setToken(value: string): void;
+  getPass(): string;
+  setPass(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AuthenticateUserRequest.AsObject;
@@ -47,7 +51,7 @@ export class AuthenticateUserRequest extends jspb.Message {
 export namespace AuthenticateUserRequest {
   export type AsObject = {
     usertag: string,
-    token: string,
+    pass: string,
   }
 }
 

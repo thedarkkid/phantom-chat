@@ -114,7 +114,8 @@ proto._auth.User.prototype.toObject = function(opt_includeInstance) {
 proto._auth.User.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    tag: jspb.Message.getFieldWithDefault(msg, 2, "")
+    tag: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -159,6 +160,10 @@ proto._auth.User.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setTag(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToken(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -202,6 +207,13 @@ proto._auth.User.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getToken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -241,6 +253,24 @@ proto._auth.User.prototype.setTag = function(value) {
 };
 
 
+/**
+ * optional string token = 3;
+ * @return {string}
+ */
+proto._auth.User.prototype.getToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto._auth.User} returns this
+ */
+proto._auth.User.prototype.setToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
 
 
 
@@ -274,7 +304,7 @@ proto._auth.AuthenticateUserRequest.prototype.toObject = function(opt_includeIns
 proto._auth.AuthenticateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     usertag: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    token: jspb.Message.getFieldWithDefault(msg, 2, "")
+    pass: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -317,7 +347,7 @@ proto._auth.AuthenticateUserRequest.deserializeBinaryFromReader = function(msg, 
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setToken(value);
+      msg.setPass(value);
       break;
     default:
       reader.skipField();
@@ -355,7 +385,7 @@ proto._auth.AuthenticateUserRequest.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getToken();
+  f = message.getPass();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -384,10 +414,10 @@ proto._auth.AuthenticateUserRequest.prototype.setUsertag = function(value) {
 
 
 /**
- * optional string token = 2;
+ * optional string pass = 2;
  * @return {string}
  */
-proto._auth.AuthenticateUserRequest.prototype.getToken = function() {
+proto._auth.AuthenticateUserRequest.prototype.getPass = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -396,7 +426,7 @@ proto._auth.AuthenticateUserRequest.prototype.getToken = function() {
  * @param {string} value
  * @return {!proto._auth.AuthenticateUserRequest} returns this
  */
-proto._auth.AuthenticateUserRequest.prototype.setToken = function(value) {
+proto._auth.AuthenticateUserRequest.prototype.setPass = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
