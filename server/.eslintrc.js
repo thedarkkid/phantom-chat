@@ -21,6 +21,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 0,
-    "max-lines": ["error", {"max": 200, "skipComments": true}]
+    "max-lines": ["error", {"max": 200, "skipComments": true}],
+    'prefer-spread': ['off']
   },
 };
