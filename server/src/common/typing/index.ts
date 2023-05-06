@@ -1,6 +1,10 @@
 import * as grpc from "@grpc/grpc-js";
 
-export interface ServiceFunction<RequestType, ResponseType> {
+export interface GenericObject {
+  [key: string]: any;
+}
+
+export interface ServiceFunction<RequestType = any, ResponseType = any> {
   (
     call: grpc.ServerUnaryCall<RequestType, ResponseType>,
     callback: grpc.requestCallback<ResponseType>
