@@ -1,12 +1,12 @@
 import { IUser } from "../typing/Auth";
-import { RPCFunction } from "../typing";
+import { ServiceFunction } from "../typing";
 
 export const authenticateUser = (req: any) => {
   console.info("FN:: authenticateUser");
   return { stat: "success", req };
 };
 
-export const getUser: RPCFunction<{ token: string }, IUser> = (
+export const getUser: ServiceFunction<{ token: string }, IUser> = async (
   req,
   callback
 ) => {
