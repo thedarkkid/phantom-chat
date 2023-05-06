@@ -3,6 +3,7 @@ import { sequelize } from "./db";
 import { auth, messages } from "./proto/loader";
 import { services as messageServiceFunctions } from "./services/objects/messages";
 import { services as authServiceFunctions } from "./services/objects/auth";
+import "dotenv/config.js";
 
 const server = new grpc.Server();
 server.addService(messages.MessageService.service, messageServiceFunctions);
