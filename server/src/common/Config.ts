@@ -1,12 +1,11 @@
-import { GenericObject } from "./typing";
-import * as process from "process";
+import { GenericReadonlyObject } from "./typing";
 
-const _config: GenericObject = {
-  JWT_SECRET: process.env.JWT_SECRET ?? "phantom-jwt-scete120",
-};
-
-const Config = (configKey: string): any | null => {
-  return _config.hasOwnProperty(configKey) ? _config[configKey] : null;
+export const Config: GenericReadonlyObject = {
+  auth: {
+    secret: process.env.JWT_SECRET ?? "phantom-jwt-scete120",
+    saltRounds: process.env.BCRYPT_SALT_ROUNDS ?? 10,
+    expiration: process.env.JWT_EXPIRATION ?? "7d",
+  },
 };
 
 export default Config;
