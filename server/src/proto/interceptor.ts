@@ -1,5 +1,5 @@
 import * as grpc from "@grpc/grpc-js";
-import { ServiceFunction } from "../common/typing";
+import { ServiceFunction, ServiceFunctionObject } from "../common/typing";
 
 export type InterceptorNext = () => void;
 
@@ -40,4 +40,18 @@ export const AddInterceptorsToService = <ReqType = any, ResType = any>(
   };
 
   return interceptedServiceFunction;
+};
+
+export const InterceptorGroup = (
+  interceptors: ServerInterceptor[],
+  serviceFnObject: ServiceFunctionObject
+): ServiceFunctionObject => {
+  const newServiceFnObject: ServiceFunctionObject = {};
+  for (const key of Object.keys(serviceFnObject))
+    newServiceFnObject[key] = AddInterceptorsToService(
+      interceptors,
+      serviceFnObject[key]
+    );
+
+  return newServiceFnObject;
 };

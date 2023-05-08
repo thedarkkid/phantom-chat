@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Messages from "./widgets/Messages";
 import { getUserMessagesList } from "../inc/services/Messages";
 import { getUser } from "../inc/services/Auth";
+import { IUser } from "../inc/typing/IUser";
 
 const Home: React.FC = () => {
-	const authUser: Promise<any> = getUser();
-	console.log(authUser, "auth-user");
+	const [ user, setUser ] = useState<IUser>({} as any);
+	useEffect(() => {
+		const loadUser = async () => {
+			setUser(await getUser())
+		}
+		loadUser();
+	}, []);
+
+	console.log(user, "auth-user");
 	// const userMessages = getUserMessagesList(authUser.id ?? 1);
 	return (
 		<>

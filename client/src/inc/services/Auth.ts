@@ -3,7 +3,7 @@ import { AuthServiceClient } from "../stubs/auth_pb_service";
 import { IUser } from "../typing/IUser";
 
 const SERVICE_HOST = "http://localhost:8080";
-export const getUser = async (token: string = "-"): Promise<IUser> => {
+export const getUser = async (token: string = "guest"): Promise<IUser> => {
 	let client = new AuthServiceClient(SERVICE_HOST);
 	let request = new GetUserRequest();
 	request.setToken(token);
