@@ -2,8 +2,9 @@ import { IUser } from "../common/typing/Auth";
 import { ServiceFunction } from "../common/typing";
 import { randomHexString } from "../common/String";
 import { Config } from "../common/Config";
-import bcrypt from "bcryptjs";
-import JWT, { JwtPayload } from "jsonwebtoken";
+import * as bcrypt from "bcryptjs";
+import * as JWT from "jsonwebtoken";
+import type { JwtPayload } from "jsonwebtoken";
 import { User } from "../db/entities/User";
 import { Model } from "sequelize-typescript";
 import * as grpc from "@grpc/grpc-js";
@@ -71,6 +72,27 @@ export const getUser: ServiceFunction<{ token: string }, IUser> = async (
   } catch (e) {
     return await guest();
   }
+};
+
+export const createUser: ServiceFunction<
+  { userTag: string; pass: string },
+  IUser
+> = async (call, callback) => {
+  const { userTag, pass } = call.request;
+  const userExists: Model = await User.findOne({
+    include: { all: true },
+    where: { tag: userTag },
+  });
+
+  if (userExists)
+    return callback({
+      code: grpc.status.ALREADY_EXISTS,
+      message: "user already exists",
+    } as any);
+
+  const user: IUser = await makeUser(userTag, pass);
+  const token: string = signJWT(user.id, userTag);
+  return callback(null, { ...user, token });
 };
 
 const makeUser = async (tag: string, pass: string): Promise<IUser> => {

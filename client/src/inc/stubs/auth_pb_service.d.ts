@@ -4,12 +4,21 @@
 import * as auth_pb from "./auth_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
+type AuthServiceCreateUser = {
+  readonly methodName: string;
+  readonly service: typeof AuthService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof auth_pb.UserRequest;
+  readonly responseType: typeof auth_pb.User;
+};
+
 type AuthServiceAuthenticateUser = {
   readonly methodName: string;
   readonly service: typeof AuthService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof auth_pb.AuthenticateUserRequest;
+  readonly requestType: typeof auth_pb.UserRequest;
   readonly responseType: typeof auth_pb.User;
 };
 
@@ -24,6 +33,7 @@ type AuthServiceGetUser = {
 
 export class AuthService {
   static readonly serviceName: string;
+  static readonly CreateUser: AuthServiceCreateUser;
   static readonly AuthenticateUser: AuthServiceAuthenticateUser;
   static readonly GetUser: AuthServiceGetUser;
 }
@@ -60,13 +70,22 @@ export class AuthServiceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
+  createUser(
+    requestMessage: auth_pb.UserRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: auth_pb.User|null) => void
+  ): UnaryResponse;
+  createUser(
+    requestMessage: auth_pb.UserRequest,
+    callback: (error: ServiceError|null, responseMessage: auth_pb.User|null) => void
+  ): UnaryResponse;
   authenticateUser(
-    requestMessage: auth_pb.AuthenticateUserRequest,
+    requestMessage: auth_pb.UserRequest,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: auth_pb.User|null) => void
   ): UnaryResponse;
   authenticateUser(
-    requestMessage: auth_pb.AuthenticateUserRequest,
+    requestMessage: auth_pb.UserRequest,
     callback: (error: ServiceError|null, responseMessage: auth_pb.User|null) => void
   ): UnaryResponse;
   getUser(

@@ -47,7 +47,7 @@ export const InterceptorGroup = (
   serviceFnObject: ServiceFunctionObject
 ): ServiceFunctionObject => {
   const newServiceFnObject: ServiceFunctionObject = {};
-  for (const key of Object.keys(serviceFnObject))
+  for (const key in serviceFnObject)
     newServiceFnObject[key] = AddInterceptorsToService(
       interceptors,
       serviceFnObject[key]

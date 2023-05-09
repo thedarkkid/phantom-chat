@@ -8,7 +8,7 @@ const Home: React.FC = () => {
 	const [ user, setUser ] = useState<IUser>({} as any);
 	useEffect(() => {
 		const loadUser = async () => {
-			setUser(await getUser())
+			// setUser(await getUser())
 		}
 		loadUser();
 	}, []);

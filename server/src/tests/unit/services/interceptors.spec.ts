@@ -53,5 +53,42 @@ describe("Test service interceptors", () => {
       type: "server_function",
       message: "sampleServiceFunction",
     });
+
+    action.mockReset();
+  });
+
+  test("server interceptor modifies call in-order", () => {
+    const interceptor1: ServerInterceptor = (call, callback, next) => {
+      call.request.info.push({ me: true });
+      next();
+    };
+
+    const interceptor2: ServerInterceptor = (call, callback, next) => {
+      call.request.info.push({ you: false });
+      call.request.info[0] = { her: "Yes" };
+      next();
+    };
+
+    const call = { request: { info: [{ her: true }] } };
+
+    const serverFn = AddInterceptorsToService(
+      [interceptor1, interceptor2],
+      makeTestServerFunction("modifiesCallFN")
+    );
+
+    const callBackFn = jest.fn();
+    serverFn(call as any, callBackFn);
+
+    expect(call.request.info.length).toBe(3); // Tests that call was modified successfully
+    expect(call.request.info[1]).toStrictEqual({ me: true }); // Tests that it was modified in-order;
+    expect(call.request.info[2]).toStrictEqual({ you: false });
+    expect(call.request.info[0]).toStrictEqual({ her: "Yes" });
+    expect(callBackFn).toBeCalledWith(null, {
+      status: "OK",
+      type: "server_function",
+      message: "modifiesCallFN",
+    });
+
+    action.mockReset();
   });
 });

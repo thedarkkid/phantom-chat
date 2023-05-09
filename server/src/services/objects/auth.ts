@@ -1,7 +1,10 @@
-import { authenticateUser, getUser } from "../Auth";
+import { authenticateUser, createUser, getUser } from "../Auth";
 import { ServiceFunctionObject } from "../../common/typing";
+import { InterceptorGroup } from "../../proto/interceptor";
+import Sanitizer from "../interceptors/Sanitizer";
 
-export const services: ServiceFunctionObject = {
+export const services: ServiceFunctionObject = InterceptorGroup([Sanitizer], {
   authenticateUser,
   getUser,
-};
+  createUser,
+});
