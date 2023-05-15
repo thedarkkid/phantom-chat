@@ -50,7 +50,6 @@ export const getUser: ServiceFunction<{ token: string }, IUser> = async (
   callback
 ) => {
   let { token } = call.request;
-
   const guest = async () => callback(null, await makeGuestUser());
 
   if (token == "guest") return await guest();
@@ -64,13 +63,20 @@ export const getUser: ServiceFunction<{ token: string }, IUser> = async (
       include: { all: true },
     });
 
-    if (!user) return await guest();
+    if (!user)
+      return callback({
+        code: grpc.status.UNAUTHENTICATED,
+        message: "unauthorized token",
+      } as any);
     unSignJWT(payload);
 
     token = signJWT(user.id, user.get("tag") as string);
     return callback(null, { ...user.toJSON(), token });
   } catch (e) {
-    return await guest();
+    return callback({
+      code: grpc.status.UNAUTHENTICATED,
+      message: "unable to authorize",
+    } as any);
   }
 };
 

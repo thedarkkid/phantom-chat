@@ -3,8 +3,10 @@ import { ServiceFunctionObject } from "../../common/typing";
 import { InterceptorGroup } from "../../proto/interceptor";
 import Sanitizer from "../interceptors/Sanitizer";
 
-export const services: ServiceFunctionObject = InterceptorGroup([Sanitizer], {
+const sanitized: ServiceFunctionObject = InterceptorGroup([Sanitizer], {
   authenticateUser,
   getUser,
   createUser,
 });
+
+export const services: ServiceFunctionObject = { ...sanitized };

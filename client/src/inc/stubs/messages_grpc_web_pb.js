@@ -79,6 +79,62 @@ proto._messages.MessageServicePromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto._messages.MessageTunnelRequest,
+ *   !proto._messages.MessageThread>}
+ */
+const methodDescriptor_MessageService_CreateMessageTunnel = new grpc.web.MethodDescriptor(
+  '/_messages.MessageService/CreateMessageTunnel',
+  grpc.web.MethodType.SERVER_STREAMING,
+  proto._messages.MessageTunnelRequest,
+  proto._messages.MessageThread,
+  /**
+   * @param {!proto._messages.MessageTunnelRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto._messages.MessageThread.deserializeBinary
+);
+
+
+/**
+ * @param {!proto._messages.MessageTunnelRequest} request The request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto._messages.MessageThread>}
+ *     The XHR Node Readable Stream
+ */
+proto._messages.MessageServiceClient.prototype.createMessageTunnel =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/_messages.MessageService/CreateMessageTunnel',
+      request,
+      metadata || {},
+      methodDescriptor_MessageService_CreateMessageTunnel);
+};
+
+
+/**
+ * @param {!proto._messages.MessageTunnelRequest} request The request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto._messages.MessageThread>}
+ *     The XHR Node Readable Stream
+ */
+proto._messages.MessageServicePromiseClient.prototype.createMessageTunnel =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/_messages.MessageService/CreateMessageTunnel',
+      request,
+      metadata || {},
+      methodDescriptor_MessageService_CreateMessageTunnel);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto._messages.ThreadRequest,
  *   !proto._messages.MessageThread>}
  */

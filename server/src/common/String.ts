@@ -1,4 +1,4 @@
-import Sanitizer from "sanitize-html";
+import * as Sanitizer from "sanitize-html";
 import Config from "./Config";
 
 export const randomHexString = (size: number): string =>
