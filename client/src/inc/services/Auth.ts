@@ -5,6 +5,7 @@ import { IAuthUser, IUser } from "../typing/IUser";
 const SERVICE_HOST = "http://localhost:8080";
 const TOKEN_KEY = '--phantom-auth-token';
 
+const serviceClient = new AuthServiceClient(SERVICE_HOST);
 export const getUser = async (token: string = "guest"): Promise<IUser> => {
 	let request = new GetUserRequest();
 	request.setToken(token);
@@ -42,6 +43,12 @@ export const registerUser = (_auth: AuthForm): Promise<IAuthUser> => {
 		});
 	})
 }
+
+export const reloadUser = async () => {
+	const authToken = getToken();
+	return await getUser(authToken);
+}
+
 export const getToken = () => localStorage.getItem(TOKEN_KEY) ?? "-";
 export const setToken = (token: string) => localStorage.setItem(TOKEN_KEY, token);
 
@@ -55,4 +62,3 @@ export interface AuthenticatorFN<P, R> {
 	(form: P): Promise<R>;
 }
 
-const serviceClient = new AuthServiceClient(SERVICE_HOST);

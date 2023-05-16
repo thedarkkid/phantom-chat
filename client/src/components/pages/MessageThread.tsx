@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { IMessageThread as iMessageThread } from "../inc/typing/IMessage";
-import { parseTimestamp } from "../inc/common/Dates";
-import "../styles/pages/widgets/messagethread.style.scss";
-import { scrollToBottom } from "../inc/common/Scroll";
+import { IMessageThread as iMessageThread } from "../../inc/typing/IMessage";
+import { parseTimestamp } from "../../inc/common/Dates";
+import "../../styles/pages/widgets/messagethread.style.scss";
+import { scrollToBottom } from "../../inc/common/Scroll";
 import { useParams } from "react-router-dom";
-import { getMessageThread } from "../inc/services/Messages";
-import { getUser } from "../inc/services/Auth";
+import { getMessageThread } from "../../inc/services/Messages";
+import { getUser } from "../../inc/services/Auth";
 
 const MessageThread: React.FC = () => {
 	// const params = useParams<{ threadId: string }>();

@@ -1,12 +1,13 @@
 import React, { ChangeEvent, FormEvent, FormEventHandler, useCallback, useState } from "react";
-import { AuthenticatorFN, AuthForm, loginUser, registerUser, setToken } from "../../inc/services/Auth";
-import { IAuthUser } from "../../inc/typing/IUser";
+import { AuthForm } from "../inc/services/Auth";
+import { AuthType, useAuth, useAuthDispatch } from "../state/context/Auth";
 
 const Authenticate: React.FC = () => {
-
 	const [ form, setForm ] = useState<Partial<AuthForm>>({ tag: "", password: "" });
-	const [ error, setError ] = useState<String>("");
-	const [ authAction, setAuthAction ] = useState<AuthAction>("login")
+	const [ authAction, setAuthAction ] = useState<AuthAction>("login");
+	const dispatch = useAuthDispatch();
+	const { error, user } = useAuth();
+
 	const updateForm = (e: ChangeEvent<HTMLElement>, field: keyof AuthForm) => {
 		e.preventDefault();
 		const oldForm = Object.assign({}, form);
@@ -15,26 +16,20 @@ const Authenticate: React.FC = () => {
 	}
 	const changeAction = (e: ChangeEvent<HTMLElement>) => {
 		e.preventDefault();
-		setError("");
 		setAuthAction((e.target as any).value as AuthAction)
 	}
+
 	const onAuthUser: FormEventHandler<HTMLFormElement> = useCallback(async (e: FormEvent) => {
-		setError("");
 		e.preventDefault();
-		const actionFn: AuthenticatorFN<AuthForm, IAuthUser> = (authAction === 'register') ? registerUser : loginUser;
+		const dispatchType: AuthType = (authAction === 'register') ? AuthType.REGISTER : AuthType.LOGIN;
+		dispatch({ type: dispatchType, payload: form })
 
-		try {
-			const user = await actionFn(form as AuthForm);
-			setToken(user.token);
-			window.location.reload();
-		}catch (e: any){
-			setError(decodeURI(e.metadata.headersMap['grpc-message'][0]));
-		}
-	}, [ authAction, form ]);
+	}, [ authAction, dispatch, form ]);
 
+	if (user) window.location.reload();
 	return (
 		<>
-			<form action="#" onSubmit={onAuthUser}>
+			<form action="pages/widgets#" onSubmit={onAuthUser}>
 				<div className="login-or-register">
 					<input type="radio" id="login" name="action" value="login" checked={"login" === authAction}
 								 onChange={changeAction}/>

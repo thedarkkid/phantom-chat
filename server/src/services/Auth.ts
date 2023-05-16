@@ -19,15 +19,17 @@ export const authenticateUser: ServiceFunction<
     where: { tag: userTag },
   });
 
-  if (!user)
-    return callback({
+  if (!user) {
+    callback({
       code: grpc.status.UNAUTHENTICATED,
       message: "usertag or pass incorrect!",
     } as any);
+    return;
+  }
 
   const isValidPass: boolean = await bcrypt.compare(
     pass,
-    user.get("pass") as string
+    user.get("password") as string
   );
 
   if (!isValidPass)

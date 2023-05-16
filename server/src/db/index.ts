@@ -1,8 +1,8 @@
 import { Model, TableOptions, Sequelize } from "sequelize-typescript";
 import { User } from "./entities/User";
-import { Message } from "./entities/Message";
+import { MessageRequest } from "./entities/MessageRequest";
 
-export const MODELS = [User, Message];
+export const MODELS = [User, MessageRequest];
 export const tableConfig: TableOptions<Model> = {
   timestamps: true,
   underscored: true,

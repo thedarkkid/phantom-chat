@@ -1,7 +1,7 @@
 import React from "react";
-import { getUserMessageRequests } from "../inc/services/Messages";
-import { IUser } from "../inc/typing/IUser";
-import { getUser } from "../inc/services/Auth";
+import { getUserMessageRequests } from "../../inc/services/Messages";
+import { IUser } from "../../inc/typing/IUser";
+import { getUser } from "../../inc/services/Auth";
 import Messages from "./widgets/Messages";
 
 const MessageRequests: React.FC = () => {
