@@ -1,14 +1,24 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import Authenticate from "./Authenticate";
+import Authentication from "./Authentication";
 import { useAuth } from "../state/context/Auth";
+import { AuthStateStatus, AuthType } from "../state/context/auth.typing";
 
 const MessageRequests = lazy(() => import("./pages/MessageRequests"));
 const NewMessage = lazy(() => import("./pages/NewMessage"));
 const Home = lazy(() => import("./pages/Home"));
 const MessageThread = lazy(() => import("./pages/MessageThread"));
 const Navigation: React.FC = () => {
-	const { user } = useAuth();
+	const { dispatch, state } = useAuth();
+	const { user, status } = state;
+
+	// Uses stored token to try to authorize user.
+	useEffect(() => {
+		if (!user && status === AuthStateStatus.PENDING) {
+			dispatch({ type: AuthType.RELOAD, payload: "" });
+		}
+	}, [])
+
 
 	return (
 		<div className="chat-body">
@@ -27,7 +37,7 @@ const Navigation: React.FC = () => {
 					<Route path="/message-thread/:threadId" element={<MessageThread/>}></Route>
 				</Routes>
 			</>}
-			{!user && <Authenticate/>}
+			{!user && <Authentication/>}
 		</div>
 	)
 }

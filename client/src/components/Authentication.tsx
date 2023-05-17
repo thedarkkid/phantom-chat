@@ -1,12 +1,13 @@
 import React, { ChangeEvent, FormEvent, FormEventHandler, useCallback, useState } from "react";
 import { AuthForm } from "../inc/services/Auth";
-import { AuthType, useAuth, useAuthDispatch } from "../state/context/Auth";
+import { useAuth } from "../state/context/Auth";
+import { AuthType } from "../state/context/auth.typing";
 
-const Authenticate: React.FC = () => {
+const Authentication: React.FC = () => {
 	const [ form, setForm ] = useState<Partial<AuthForm>>({ tag: "", password: "" });
 	const [ authAction, setAuthAction ] = useState<AuthAction>("login");
-	const dispatch = useAuthDispatch();
-	const { error, user } = useAuth();
+	const { state, dispatch } = useAuth();
+	const { user, error } = state;
 
 	const updateForm = (e: ChangeEvent<HTMLElement>, field: keyof AuthForm) => {
 		e.preventDefault();
@@ -54,4 +55,4 @@ const Authenticate: React.FC = () => {
 type AuthAction = "login" | "register";
 
 
-export default Authenticate;
+export default Authentication;

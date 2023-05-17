@@ -3,7 +3,7 @@ import Messages from "./widgets/Messages";
 import { getUserMessagesList } from "../../inc/services/Messages";
 import { getToken, getUser } from "../../inc/services/Auth";
 import { IUser } from "../../inc/typing/IUser";
-import Authenticate from "../Authenticate";
+import Authentication from "../Authentication";
 import { useAuth } from "../../state/context/Auth";
 
 const Home: React.FC = () => {
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 			<section className="messages">
 				{/*<Messages messages={userMessages}/>*/}
 			</section>
-			{/*{!hasAuth && <Authenticate/>}*/}
+			{/*{!hasAuth && <Authentication/>}*/}
 		</>
 	);
 }
