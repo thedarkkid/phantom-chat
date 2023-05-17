@@ -162,3 +162,53 @@ export namespace MessageTunnelRequest {
   }
 }
 
+export class NewMessageRequest extends jspb.Message {
+  getSenderid(): string;
+  setSenderid(value: string): void;
+
+  getRecipientid(): string;
+  setRecipientid(value: string): void;
+
+  hasMessage(): boolean;
+  clearMessage(): void;
+  getMessage(): Message | undefined;
+  setMessage(value?: Message): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): NewMessageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: NewMessageRequest): NewMessageRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: NewMessageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): NewMessageRequest;
+  static deserializeBinaryFromReader(message: NewMessageRequest, reader: jspb.BinaryReader): NewMessageRequest;
+}
+
+export namespace NewMessageRequest {
+  export type AsObject = {
+    senderid: string,
+    recipientid: string,
+    message?: Message.AsObject,
+  }
+}
+
+export class NewMessageRequestResponse extends jspb.Message {
+  getStatus(): string;
+  setStatus(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): NewMessageRequestResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: NewMessageRequestResponse): NewMessageRequestResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: NewMessageRequestResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): NewMessageRequestResponse;
+  static deserializeBinaryFromReader(message: NewMessageRequestResponse, reader: jspb.BinaryReader): NewMessageRequestResponse;
+}
+
+export namespace NewMessageRequestResponse {
+  export type AsObject = {
+    status: string,
+  }
+}
+

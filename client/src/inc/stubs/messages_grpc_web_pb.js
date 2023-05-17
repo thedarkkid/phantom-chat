@@ -79,6 +79,67 @@ proto._messages.MessageServicePromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto._messages.NewMessageRequest,
+ *   !proto._messages.NewMessageRequestResponse>}
+ */
+const methodDescriptor_MessageService_CreateMessageRequest = new grpc.web.MethodDescriptor(
+  '/_messages.MessageService/CreateMessageRequest',
+  grpc.web.MethodType.UNARY,
+  proto._messages.NewMessageRequest,
+  proto._messages.NewMessageRequestResponse,
+  /**
+   * @param {!proto._messages.NewMessageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto._messages.NewMessageRequestResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto._messages.NewMessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto._messages.NewMessageRequestResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto._messages.NewMessageRequestResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto._messages.MessageServiceClient.prototype.createMessageRequest =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/_messages.MessageService/CreateMessageRequest',
+      request,
+      metadata || {},
+      methodDescriptor_MessageService_CreateMessageRequest,
+      callback);
+};
+
+
+/**
+ * @param {!proto._messages.NewMessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto._messages.NewMessageRequestResponse>}
+ *     Promise that resolves to the response
+ */
+proto._messages.MessageServicePromiseClient.prototype.createMessageRequest =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/_messages.MessageService/CreateMessageRequest',
+      request,
+      metadata || {},
+      methodDescriptor_MessageService_CreateMessageRequest);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto._messages.MessageTunnelRequest,
  *   !proto._messages.MessageThread>}
  */

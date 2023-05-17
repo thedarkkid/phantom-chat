@@ -10,6 +10,15 @@ var MessageService = (function () {
   return MessageService;
 }());
 
+MessageService.CreateMessageRequest = {
+  methodName: "CreateMessageRequest",
+  service: MessageService,
+  requestStream: false,
+  responseStream: false,
+  requestType: messages_pb.NewMessageRequest,
+  responseType: messages_pb.NewMessageRequestResponse
+};
+
 MessageService.CreateMessageTunnel = {
   methodName: "CreateMessageTunnel",
   service: MessageService,
@@ -52,6 +61,37 @@ function MessageServiceClient(serviceHost, options) {
   this.serviceHost = serviceHost;
   this.options = options || {};
 }
+
+MessageServiceClient.prototype.createMessageRequest = function createMessageRequest(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(MessageService.CreateMessageRequest, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
 
 MessageServiceClient.prototype.createMessageTunnel = function createMessageTunnel(requestMessage, metadata) {
   var listeners = {

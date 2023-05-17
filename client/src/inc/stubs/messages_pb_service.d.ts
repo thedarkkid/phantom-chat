@@ -4,6 +4,15 @@
 import * as messages_pb from "./messages_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
+type MessageServiceCreateMessageRequest = {
+  readonly methodName: string;
+  readonly service: typeof MessageService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof messages_pb.NewMessageRequest;
+  readonly responseType: typeof messages_pb.NewMessageRequestResponse;
+};
+
 type MessageServiceCreateMessageTunnel = {
   readonly methodName: string;
   readonly service: typeof MessageService;
@@ -42,6 +51,7 @@ type MessageServiceGetUserMessagesRequests = {
 
 export class MessageService {
   static readonly serviceName: string;
+  static readonly CreateMessageRequest: MessageServiceCreateMessageRequest;
   static readonly CreateMessageTunnel: MessageServiceCreateMessageTunnel;
   static readonly GetMessageThread: MessageServiceGetMessageThread;
   static readonly GetUserMessagesList: MessageServiceGetUserMessagesList;
@@ -80,6 +90,15 @@ export class MessageServiceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
+  createMessageRequest(
+    requestMessage: messages_pb.NewMessageRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: messages_pb.NewMessageRequestResponse|null) => void
+  ): UnaryResponse;
+  createMessageRequest(
+    requestMessage: messages_pb.NewMessageRequest,
+    callback: (error: ServiceError|null, responseMessage: messages_pb.NewMessageRequestResponse|null) => void
+  ): UnaryResponse;
   createMessageTunnel(requestMessage: messages_pb.MessageTunnelRequest, metadata?: grpc.Metadata): ResponseStream<messages_pb.MessageThread>;
   getMessageThread(
     requestMessage: messages_pb.ThreadRequest,
