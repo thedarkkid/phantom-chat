@@ -28,7 +28,13 @@ message MessagesResponse {
   repeated Message messages = 1;
 }
 
+message MessageTunnelRequest {
+  string senderId = 1;
+  string recipientId = 2;
+}
+
 service MessageService {
+  rpc CreateMessageTunnel(MessageTunnelRequest) returns (stream MessageThread){}
   rpc GetMessageThread(ThreadRequest) returns (MessageThread){}
   rpc GetUserMessagesList(MessageRequest) returns(MessagesResponse){}
   rpc GetUserMessagesRequests(MessageRequest) returns(MessagesResponse){}

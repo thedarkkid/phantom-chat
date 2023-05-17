@@ -77,16 +77,16 @@ proto._auth.AuthServicePromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto._auth.AuthenticateUserRequest,
+ *   !proto._auth.UserRequest,
  *   !proto._auth.User>}
  */
-const methodDescriptor_AuthService_AuthenticateUser = new grpc.web.MethodDescriptor(
-  '/_auth.AuthService/AuthenticateUser',
+const methodDescriptor_AuthService_CreateUser = new grpc.web.MethodDescriptor(
+  '/_auth.AuthService/CreateUser',
   grpc.web.MethodType.UNARY,
-  proto._auth.AuthenticateUserRequest,
+  proto._auth.UserRequest,
   proto._auth.User,
   /**
-   * @param {!proto._auth.AuthenticateUserRequest} request
+   * @param {!proto._auth.UserRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -97,7 +97,68 @@ const methodDescriptor_AuthService_AuthenticateUser = new grpc.web.MethodDescrip
 
 
 /**
- * @param {!proto._auth.AuthenticateUserRequest} request The
+ * @param {!proto._auth.UserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto._auth.User)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto._auth.User>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto._auth.AuthServiceClient.prototype.createUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/_auth.AuthService/CreateUser',
+      request,
+      metadata || {},
+      methodDescriptor_AuthService_CreateUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto._auth.UserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto._auth.User>}
+ *     Promise that resolves to the response
+ */
+proto._auth.AuthServicePromiseClient.prototype.createUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/_auth.AuthService/CreateUser',
+      request,
+      metadata || {},
+      methodDescriptor_AuthService_CreateUser);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto._auth.UserRequest,
+ *   !proto._auth.User>}
+ */
+const methodDescriptor_AuthService_AuthenticateUser = new grpc.web.MethodDescriptor(
+  '/_auth.AuthService/AuthenticateUser',
+  grpc.web.MethodType.UNARY,
+  proto._auth.UserRequest,
+  proto._auth.User,
+  /**
+   * @param {!proto._auth.UserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto._auth.User.deserializeBinary
+);
+
+
+/**
+ * @param {!proto._auth.UserRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -118,7 +179,7 @@ proto._auth.AuthServiceClient.prototype.authenticateUser =
 
 
 /**
- * @param {!proto._auth.AuthenticateUserRequest} request The
+ * @param {!proto._auth.UserRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata

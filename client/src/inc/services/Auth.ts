@@ -1,13 +1,64 @@
-import { GetUserRequest } from "../stubs/auth_pb";
+import { GetUserRequest, User, UserRequest } from "../stubs/auth_pb";
 import { AuthServiceClient } from "../stubs/auth_pb_service";
+import { IAuthUser, IUser } from "../typing/IUser";
 
-export const getUser =  (token: string = "ran"): any => {
-	let client = new AuthServiceClient('http://localhost:8080');
+const SERVICE_HOST = "http://localhost:8080";
+const TOKEN_KEY = '--phantom-auth-token';
+
+const serviceClient = new AuthServiceClient(SERVICE_HOST);
+export const getUser = async (token: string = "guest"): Promise<IUser> => {
 	let request = new GetUserRequest();
 	request.setToken(token);
 
-	console.log("tried to get user");
-	return client.getUser(request, {} as any, (err, response) => {
-		console.log(response, "auth res");
+	return new Promise((resolve, reject) => {
+		serviceClient.getUser(request, {} as any, (err, res: User | null) => {
+			if (res) resolve(res?.toObject() as IUser);
+			if (err || !res) reject(err);
+		});
 	})
 }
+
+export const loginUser = (auth: AuthForm): Promise<IAuthUser> => {
+	let request = new UserRequest();
+	request.setPass(auth.password);
+	request.setUsertag(auth.tag)
+
+	return new Promise((resolve, reject) => {
+		serviceClient.authenticateUser(request, {} as any, (err, res: User | null) => {
+			if (res) resolve(res?.toObject() as IAuthUser);
+			if (err || !res) reject(err);
+		});
+	})
+}
+
+export const registerUser = (_auth: AuthForm): Promise<IAuthUser> => {
+	let request = new UserRequest();
+	request.setPass(_auth.password);
+	request.setUsertag(_auth.tag)
+
+	return new Promise((resolve, reject) => {
+		serviceClient.createUser(request, {} as any, (err, res: User | null) => {
+			if (res) resolve(res?.toObject() as IAuthUser);
+			if (err || !res) reject(err);
+		});
+	})
+}
+
+export const reloadUser = async () => {
+	const authToken = getToken();
+	return await getUser(authToken);
+}
+
+export const getToken = () => localStorage.getItem(TOKEN_KEY) ?? "-";
+export const setToken = (token: string) => localStorage.setItem(TOKEN_KEY, token);
+
+
+export interface AuthForm {
+	tag: string;
+	password: string;
+}
+
+export interface AuthenticatorFN<P, R> {
+	(form: P): Promise<R>;
+}
+

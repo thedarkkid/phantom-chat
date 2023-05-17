@@ -4,6 +4,15 @@
 import * as messages_pb from "./messages_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
+type MessageServiceCreateMessageTunnel = {
+  readonly methodName: string;
+  readonly service: typeof MessageService;
+  readonly requestStream: false;
+  readonly responseStream: true;
+  readonly requestType: typeof messages_pb.MessageTunnelRequest;
+  readonly responseType: typeof messages_pb.MessageThread;
+};
+
 type MessageServiceGetMessageThread = {
   readonly methodName: string;
   readonly service: typeof MessageService;
@@ -33,6 +42,7 @@ type MessageServiceGetUserMessagesRequests = {
 
 export class MessageService {
   static readonly serviceName: string;
+  static readonly CreateMessageTunnel: MessageServiceCreateMessageTunnel;
   static readonly GetMessageThread: MessageServiceGetMessageThread;
   static readonly GetUserMessagesList: MessageServiceGetUserMessagesList;
   static readonly GetUserMessagesRequests: MessageServiceGetUserMessagesRequests;
@@ -70,6 +80,7 @@ export class MessageServiceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
+  createMessageTunnel(requestMessage: messages_pb.MessageTunnelRequest, metadata?: grpc.Metadata): ResponseStream<messages_pb.MessageThread>;
   getMessageThread(
     requestMessage: messages_pb.ThreadRequest,
     metadata: grpc.Metadata,

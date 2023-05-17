@@ -10,6 +10,9 @@ export class User extends jspb.Message {
   getTag(): string;
   setTag(value: string): void;
 
+  getToken(): string;
+  setToken(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): User.AsObject;
   static toObject(includeInstance: boolean, msg: User): User.AsObject;
@@ -24,30 +27,31 @@ export namespace User {
   export type AsObject = {
     id: string,
     tag: string,
+    token: string,
   }
 }
 
-export class AuthenticateUserRequest extends jspb.Message {
+export class UserRequest extends jspb.Message {
   getUsertag(): string;
   setUsertag(value: string): void;
 
-  getToken(): string;
-  setToken(value: string): void;
+  getPass(): string;
+  setPass(value: string): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): AuthenticateUserRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: AuthenticateUserRequest): AuthenticateUserRequest.AsObject;
+  toObject(includeInstance?: boolean): UserRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: UserRequest): UserRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: AuthenticateUserRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): AuthenticateUserRequest;
-  static deserializeBinaryFromReader(message: AuthenticateUserRequest, reader: jspb.BinaryReader): AuthenticateUserRequest;
+  static serializeBinaryToWriter(message: UserRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UserRequest;
+  static deserializeBinaryFromReader(message: UserRequest, reader: jspb.BinaryReader): UserRequest;
 }
 
-export namespace AuthenticateUserRequest {
+export namespace UserRequest {
   export type AsObject = {
     usertag: string,
-    token: string,
+    pass: string,
   }
 }
 

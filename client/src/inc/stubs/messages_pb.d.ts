@@ -138,3 +138,27 @@ export namespace MessagesResponse {
   }
 }
 
+export class MessageTunnelRequest extends jspb.Message {
+  getSenderid(): string;
+  setSenderid(value: string): void;
+
+  getRecipientid(): string;
+  setRecipientid(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): MessageTunnelRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: MessageTunnelRequest): MessageTunnelRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: MessageTunnelRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): MessageTunnelRequest;
+  static deserializeBinaryFromReader(message: MessageTunnelRequest, reader: jspb.BinaryReader): MessageTunnelRequest;
+}
+
+export namespace MessageTunnelRequest {
+  export type AsObject = {
+    senderid: string,
+    recipientid: string,
+  }
+}
+

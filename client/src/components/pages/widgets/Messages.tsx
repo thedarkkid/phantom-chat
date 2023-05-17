@@ -1,10 +1,10 @@
 import React from "react";
-import { Message } from "../../inc/typing/Message";
-import { parseTimestamp } from "../../inc/common/Dates";
+import { IMessage } from "../../../inc/typing/IMessage";
+import { parseTimestamp } from "../../../inc/common/Dates";
 import { useNavigate } from "react-router-dom";
-import "../../styles/pages/widgets/messages.style.scss";
+import "../../../styles/pages/widgets/messages.style.scss";
 
-const Messages: React.FC<{ messages: Message[], title?: string }> = ({ messages, title = "Messages" }) => {
+const Messages: React.FC<{ messages: IMessage[], title?: string }> = ({ messages, title = "Messages" }) => {
 	const navigate = useNavigate();
 	const redirectToThread = (threadId: string) => {
 		navigate(`/message-thread/${threadId}`);
