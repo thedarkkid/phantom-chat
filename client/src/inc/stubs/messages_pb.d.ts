@@ -166,13 +166,11 @@ export class NewMessageRequest extends jspb.Message {
   getSenderid(): string;
   setSenderid(value: string): void;
 
-  getRecipientid(): string;
-  setRecipientid(value: string): void;
+  getRecipienttag(): string;
+  setRecipienttag(value: string): void;
 
-  hasMessage(): boolean;
-  clearMessage(): void;
-  getMessage(): Message | undefined;
-  setMessage(value?: Message): void;
+  getMessage(): string;
+  setMessage(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): NewMessageRequest.AsObject;
@@ -187,8 +185,8 @@ export class NewMessageRequest extends jspb.Message {
 export namespace NewMessageRequest {
   export type AsObject = {
     senderid: string,
-    recipientid: string,
-    message?: Message.AsObject,
+    recipienttag: string,
+    message: string,
   }
 }
 

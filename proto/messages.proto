@@ -35,8 +35,8 @@ message MessageTunnelRequest {
 
 message NewMessageRequest{
   string senderId = 1;
-  string recipientId = 2;
-  Message message = 3;
+  string recipientTag = 2;
+  string message = 3;
 }
 
 message NewMessageRequestResponse{
@@ -44,7 +44,7 @@ message NewMessageRequestResponse{
 }
 
 service MessageService {
-  rpc CreateMessageRequest (NewMessageRequest) returns (NewMessageRequestResponse){}
+  rpc CreateNewMessageRequest (NewMessageRequest) returns (NewMessageRequestResponse){}
   rpc CreateMessageTunnel(MessageTunnelRequest) returns (stream MessageThread){}
   rpc GetMessageThread(ThreadRequest) returns (MessageThread){}
   rpc GetUserMessagesList(MessageRequest) returns(MessagesResponse){}

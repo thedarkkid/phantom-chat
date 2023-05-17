@@ -13,3 +13,9 @@ export interface IMessageThread {
 	threadId: string;
 	messages: IMessage[]
 }
+
+export interface INewMessageRequest {
+	senderId: string;
+	recipientTag: string;
+	message: string;
+}

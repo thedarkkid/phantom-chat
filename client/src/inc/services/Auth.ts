@@ -1,8 +1,8 @@
 import { GetUserRequest, User, UserRequest } from "../stubs/auth_pb";
 import { AuthServiceClient } from "../stubs/auth_pb_service";
 import { IAuthUser, IUser } from "../typing/IUser";
+import { SERVICE_HOST } from "../common/Config";
 
-const SERVICE_HOST = "http://localhost:8080";
 const TOKEN_KEY = '--phantom-auth-token';
 
 const serviceClient = new AuthServiceClient(SERVICE_HOST);

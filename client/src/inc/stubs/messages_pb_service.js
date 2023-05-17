@@ -10,8 +10,8 @@ var MessageService = (function () {
   return MessageService;
 }());
 
-MessageService.CreateMessageRequest = {
-  methodName: "CreateMessageRequest",
+MessageService.CreateNewMessageRequest = {
+  methodName: "CreateNewMessageRequest",
   service: MessageService,
   requestStream: false,
   responseStream: false,
@@ -62,11 +62,11 @@ function MessageServiceClient(serviceHost, options) {
   this.options = options || {};
 }
 
-MessageServiceClient.prototype.createMessageRequest = function createMessageRequest(requestMessage, metadata, callback) {
+MessageServiceClient.prototype.createNewMessageRequest = function createNewMessageRequest(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(MessageService.CreateMessageRequest, {
+  var client = grpc.unary(MessageService.CreateNewMessageRequest, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

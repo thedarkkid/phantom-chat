@@ -82,8 +82,8 @@ proto._messages.MessageServicePromiseClient =
  *   !proto._messages.NewMessageRequest,
  *   !proto._messages.NewMessageRequestResponse>}
  */
-const methodDescriptor_MessageService_CreateMessageRequest = new grpc.web.MethodDescriptor(
-  '/_messages.MessageService/CreateMessageRequest',
+const methodDescriptor_MessageService_CreateNewMessageRequest = new grpc.web.MethodDescriptor(
+  '/_messages.MessageService/CreateNewMessageRequest',
   grpc.web.MethodType.UNARY,
   proto._messages.NewMessageRequest,
   proto._messages.NewMessageRequestResponse,
@@ -108,13 +108,13 @@ const methodDescriptor_MessageService_CreateMessageRequest = new grpc.web.Method
  * @return {!grpc.web.ClientReadableStream<!proto._messages.NewMessageRequestResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto._messages.MessageServiceClient.prototype.createMessageRequest =
+proto._messages.MessageServiceClient.prototype.createNewMessageRequest =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/_messages.MessageService/CreateMessageRequest',
+      '/_messages.MessageService/CreateNewMessageRequest',
       request,
       metadata || {},
-      methodDescriptor_MessageService_CreateMessageRequest,
+      methodDescriptor_MessageService_CreateNewMessageRequest,
       callback);
 };
 
@@ -127,13 +127,13 @@ proto._messages.MessageServiceClient.prototype.createMessageRequest =
  * @return {!Promise<!proto._messages.NewMessageRequestResponse>}
  *     Promise that resolves to the response
  */
-proto._messages.MessageServicePromiseClient.prototype.createMessageRequest =
+proto._messages.MessageServicePromiseClient.prototype.createNewMessageRequest =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/_messages.MessageService/CreateMessageRequest',
+      '/_messages.MessageService/CreateNewMessageRequest',
       request,
       metadata || {},
-      methodDescriptor_MessageService_CreateMessageRequest);
+      methodDescriptor_MessageService_CreateNewMessageRequest);
 };
 
 

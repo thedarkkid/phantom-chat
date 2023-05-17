@@ -1,4 +1,5 @@
 import {
+  createNewMessageRequest,
   getMessageThread,
   getUserMessagesList,
   getUserMessagesRequest,
@@ -9,4 +10,5 @@ export const services: ServiceFunctionObject = {
   getMessageThread,
   getUserMessagesList,
   getUserMessagesRequest,
+  createNewMessageRequest,
 };

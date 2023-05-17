@@ -1339,8 +1339,8 @@ proto._messages.NewMessageRequest.prototype.toObject = function(opt_includeInsta
 proto._messages.NewMessageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     senderid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recipientid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    message: (f = msg.getMessage()) && proto._messages.Message.toObject(includeInstance, f)
+    recipienttag: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -1383,11 +1383,10 @@ proto._messages.NewMessageRequest.deserializeBinaryFromReader = function(msg, re
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecipientid(value);
+      msg.setRecipienttag(value);
       break;
     case 3:
-      var value = new proto._messages.Message;
-      reader.readMessage(value,proto._messages.Message.deserializeBinaryFromReader);
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -1426,7 +1425,7 @@ proto._messages.NewMessageRequest.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getRecipientid();
+  f = message.getRecipienttag();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -1434,11 +1433,10 @@ proto._messages.NewMessageRequest.serializeBinaryToWriter = function(message, wr
     );
   }
   f = message.getMessage();
-  if (f != null) {
-    writer.writeMessage(
+  if (f.length > 0) {
+    writer.writeString(
       3,
-      f,
-      proto._messages.Message.serializeBinaryToWriter
+      f
     );
   }
 };
@@ -1463,10 +1461,10 @@ proto._messages.NewMessageRequest.prototype.setSenderid = function(value) {
 
 
 /**
- * optional string recipientId = 2;
+ * optional string recipientTag = 2;
  * @return {string}
  */
-proto._messages.NewMessageRequest.prototype.getRecipientid = function() {
+proto._messages.NewMessageRequest.prototype.getRecipienttag = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1475,45 +1473,26 @@ proto._messages.NewMessageRequest.prototype.getRecipientid = function() {
  * @param {string} value
  * @return {!proto._messages.NewMessageRequest} returns this
  */
-proto._messages.NewMessageRequest.prototype.setRecipientid = function(value) {
+proto._messages.NewMessageRequest.prototype.setRecipienttag = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional Message message = 3;
- * @return {?proto._messages.Message}
+ * optional string message = 3;
+ * @return {string}
  */
 proto._messages.NewMessageRequest.prototype.getMessage = function() {
-  return /** @type{?proto._messages.Message} */ (
-    jspb.Message.getWrapperField(this, proto._messages.Message, 3));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {?proto._messages.Message|undefined} value
+ * @param {string} value
  * @return {!proto._messages.NewMessageRequest} returns this
-*/
+ */
 proto._messages.NewMessageRequest.prototype.setMessage = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto._messages.NewMessageRequest} returns this
- */
-proto._messages.NewMessageRequest.prototype.clearMessage = function() {
-  return this.setMessage(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto._messages.NewMessageRequest.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

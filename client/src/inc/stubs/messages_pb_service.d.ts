@@ -4,7 +4,7 @@
 import * as messages_pb from "./messages_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type MessageServiceCreateMessageRequest = {
+type MessageServiceCreateNewMessageRequest = {
   readonly methodName: string;
   readonly service: typeof MessageService;
   readonly requestStream: false;
@@ -51,7 +51,7 @@ type MessageServiceGetUserMessagesRequests = {
 
 export class MessageService {
   static readonly serviceName: string;
-  static readonly CreateMessageRequest: MessageServiceCreateMessageRequest;
+  static readonly CreateNewMessageRequest: MessageServiceCreateNewMessageRequest;
   static readonly CreateMessageTunnel: MessageServiceCreateMessageTunnel;
   static readonly GetMessageThread: MessageServiceGetMessageThread;
   static readonly GetUserMessagesList: MessageServiceGetUserMessagesList;
@@ -90,12 +90,12 @@ export class MessageServiceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  createMessageRequest(
+  createNewMessageRequest(
     requestMessage: messages_pb.NewMessageRequest,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: messages_pb.NewMessageRequestResponse|null) => void
   ): UnaryResponse;
-  createMessageRequest(
+  createNewMessageRequest(
     requestMessage: messages_pb.NewMessageRequest,
     callback: (error: ServiceError|null, responseMessage: messages_pb.NewMessageRequestResponse|null) => void
   ): UnaryResponse;

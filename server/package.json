@@ -37,6 +37,7 @@
     "dotenv": "^16.0.3",
     "google-protobuf": "^3.21.2",
     "jsonwebtoken": "^9.0.0",
+    "node-localstorage": "^2.2.1",
     "sanitize-html": "^2.10.0",
     "sequelize": "^6.31.1",
     "sequelize-typescript": "^2.1.5",
