@@ -4,7 +4,7 @@ import { AuthState, AuthStateStatus, AuthStatusType, AuthType, AuthReducerAction
 import { SideEffect } from "../../inc/typing";
 
 export const AuthContext = createContext<AuthState>({} as AuthState);
-export const AuthDispatchContext = createContext<Dispatch<any>>(null as any);
+export const AuthDispatchContext = createContext<Dispatch<AuthReducerAction>>(null as any);
 
 export const useAuth = (): { state: AuthState, dispatch: Dispatch<AuthReducerAction> } => ({
 	state: useContext(AuthContext),

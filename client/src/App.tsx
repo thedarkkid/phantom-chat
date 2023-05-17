@@ -4,9 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AuthProvider from "./state/AuthProvider";
 import Navigation from "./components/Navigation";
 
-
 const App: React.FC = () => {
-	// @ts-ignore
 	return (
 		<Router>
 			<Suspense fallback={<div>Loading.....</div>}>
