@@ -9,6 +9,11 @@ const Authentication: React.FC = () => {
 	const { state, dispatch } = useAuth();
 	const { user, error } = state;
 
+	/**
+	 * TODO: validate tag names
+	 * @param e
+	 * @param field
+	 */
 	const updateForm = (e: ChangeEvent<HTMLElement>, field: keyof AuthForm) => {
 		e.preventDefault();
 		const oldForm = Object.assign({}, form);

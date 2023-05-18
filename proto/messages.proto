@@ -41,6 +41,7 @@ message NewMessageRequest{
 
 message NewMessageRequestResponse{
   string status = 1;
+  string message = 2;
 }
 
 service MessageService {

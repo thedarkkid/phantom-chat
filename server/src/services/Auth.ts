@@ -8,6 +8,7 @@ import type { JwtPayload } from "jsonwebtoken";
 import { User } from "../db/entities/User";
 import { Model } from "sequelize-typescript";
 import * as grpc from "@grpc/grpc-js";
+import { ServiceError } from "@grpc/grpc-js";
 
 export const authenticateUser: ServiceFunction<
   { userTag: string; pass: string },
@@ -23,7 +24,7 @@ export const authenticateUser: ServiceFunction<
     callback({
       code: grpc.status.UNAUTHENTICATED,
       message: "usertag or pass incorrect!",
-    } as any);
+    } as ServiceError);
     return;
   }
 
@@ -36,7 +37,7 @@ export const authenticateUser: ServiceFunction<
     return callback({
       code: grpc.status.UNAUTHENTICATED,
       message: "usertag or pass incorrect!",
-    } as any);
+    } as ServiceError);
 
   const token: string = signJWT(user.id, userTag);
   return callback(null, { ...user.toJSON(), token });
@@ -69,7 +70,7 @@ export const getUser: ServiceFunction<{ token: string }, IUser> = async (
       return callback({
         code: grpc.status.UNAUTHENTICATED,
         message: "unauthorized token",
-      } as any);
+      } as ServiceError);
     unSignJWT(payload);
 
     token = signJWT(user.id, user.get("tag") as string);
@@ -78,7 +79,7 @@ export const getUser: ServiceFunction<{ token: string }, IUser> = async (
     return callback({
       code: grpc.status.UNAUTHENTICATED,
       message: "unable to authorize",
-    } as any);
+    } as ServiceError);
   }
 };
 
@@ -96,7 +97,7 @@ export const createUser: ServiceFunction<
     return callback({
       code: grpc.status.ALREADY_EXISTS,
       message: "user already exists",
-    } as any);
+    } as ServiceError);
 
   const user: IUser = await makeUser(userTag, pass);
   const token: string = signJWT(user.id, userTag);

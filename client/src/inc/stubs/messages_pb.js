@@ -1528,7 +1528,8 @@ proto._messages.NewMessageRequestResponse.prototype.toObject = function(opt_incl
  */
 proto._messages.NewMessageRequestResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, "")
+    status: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1569,6 +1570,10 @@ proto._messages.NewMessageRequestResponse.deserializeBinaryFromReader = function
       var value = /** @type {string} */ (reader.readString());
       msg.setStatus(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1605,6 +1610,13 @@ proto._messages.NewMessageRequestResponse.serializeBinaryToWriter = function(mes
       f
     );
   }
+  f = message.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -1623,6 +1635,24 @@ proto._messages.NewMessageRequestResponse.prototype.getStatus = function() {
  */
 proto._messages.NewMessageRequestResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string message = 2;
+ * @return {string}
+ */
+proto._messages.NewMessageRequestResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto._messages.NewMessageRequestResponse} returns this
+ */
+proto._messages.NewMessageRequestResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

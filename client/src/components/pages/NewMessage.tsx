@@ -20,7 +20,7 @@ const NewMessage: React.FC = () => {
 				<form onSubmit={onSendNewMessage}>
 					<div className="message-request-tag">
 						<label htmlFor="message-request-tag">User Tag</label>
-						<input id="message-request-tag" placeholder="@usertag" onChange={(e) => setRecipientTag(e.target.value)}/>
+						<input id="message-request-tag" placeholder="usertag" onChange={(e) => setRecipientTag(e.target.value)}/>
 					</div>
 					<textarea id="message-request-tag" placeholder="message" onChange={(e) => setMessage(e.target.value)}/>
 					<button type="submit">Message</button>

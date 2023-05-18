@@ -1,4 +1,5 @@
 import { GenericReadonlyObject } from "./typing";
+import * as path from "path";
 
 export const Config: GenericReadonlyObject = {
   auth: {
@@ -12,6 +13,9 @@ export const Config: GenericReadonlyObject = {
       allowedAttributes: {},
       disallowedTagsMode: "recursiveEscape",
     },
+  },
+  storage: {
+    chat: path.join(__dirname, "../../", "chat"),
   },
 };
 

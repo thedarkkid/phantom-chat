@@ -194,6 +194,9 @@ export class NewMessageRequestResponse extends jspb.Message {
   getStatus(): string;
   setStatus(value: string): void;
 
+  getMessage(): string;
+  setMessage(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): NewMessageRequestResponse.AsObject;
   static toObject(includeInstance: boolean, msg: NewMessageRequestResponse): NewMessageRequestResponse.AsObject;
@@ -207,6 +210,7 @@ export class NewMessageRequestResponse extends jspb.Message {
 export namespace NewMessageRequestResponse {
   export type AsObject = {
     status: string,
+    message: string,
   }
 }
 
